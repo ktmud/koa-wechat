@@ -1,0 +1,30 @@
+{
+  "name": "koa-wechat",
+  "version": "0.0.1",
+  "description": "wechat offical account API middleware for koajs",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "dependencies": {
+    "wechat-mp": "~0.1.2"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/ktmud/koa-wechat"
+  },
+  "keywords": [
+    "koa",
+    "koajs",
+    "wechat",
+    "weixin",
+    "微信",
+    "koa-middleware"
+  ],
+  "author": "ktmud <kissmud@gmail.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/ktmud/koa-wechat/issues"
+  },
+  "homepage": "https://github.com/ktmud/koa-wechat"
+}
