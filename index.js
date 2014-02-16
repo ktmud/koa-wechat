@@ -23,11 +23,12 @@ function generateSid(data) {
  */
 module.exports = function(options) {
   options = options || { tokenProp: 'wx_token' }
+  var tokenProp = options.tokenProp
   return function *(next) {
-    var token = this[tokenProp] || options.token
+    var token = tokenProp && this[tokenProp] || options.token
     // verify signatures
     if (!wechat.checkSignature(token, this.query)) {
-      this.throw(401)
+      this.throw(401, 'Invalid signature')
     }
     if (this.method == 'GET') {
       this.body = this.query.echostr
@@ -35,17 +36,28 @@ module.exports = function(options) {
     }
 
     // parse request xml
-    this.req.body = yield parse
+    this.req.body = yield parse(this.req)
 
     // set sessionId if neccessary
     if (options.session !== false) {
-      Object.defineProperty(this, 'sessionId', { value: generateSid(this.req.body) })
+      var sid = generateSid(this.req.body)
+      // always return the same sessionId
+      Object.defineProperty(this, 'sessionId', {
+        get: function() { return sid },
+        set: function(){ }
+      })
     }
-
     // run other middlewares
     yield next
     // output
     this.type = 'application/xml'
     this.body = wechat.dump(this.body)
   }
+}
+
+/**
+ * To close the request, stop runs any `next` actions
+ */
+module.exports.close = function() {
+  return function *() { }
 }
