@@ -1,6 +1,6 @@
 {
   "name": "koa-wechat",
-  "version": "0.0.1",
+  "version": "0.1.0",
   "description": "wechat offical account API middleware for koajs",
   "main": "index.js",
   "scripts": {
