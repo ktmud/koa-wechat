@@ -51,7 +51,7 @@ module.exports = function(options) {
     yield next
     // output
     this.type = 'application/xml'
-    this.body = wechat.dump(this.body)
+    this.body = wechat.dump(wechat.ensure(this.body, this.req.body))
   }
 }
 
