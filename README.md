@@ -55,6 +55,12 @@ Token assigned to wechat API.
 
 Find the token from a `ctx` property, i.e., `this[tokenProp]`
 
+
+## options.checksig
+
+Whether we need to check signature or not, default to `true`.
+
+
 ## options.session
 
 By default, koa-wechat will set a `this.sessionId` to identify (a offical account + a subscriber)

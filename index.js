@@ -24,10 +24,11 @@ function generateSid(data) {
 module.exports = function(options) {
   options = options || { tokenProp: 'wx_token' }
   var tokenProp = options.tokenProp
+  var checksig = 'checksig' in options ? options.checksig : true
   return function *(next) {
     var token = tokenProp && this[tokenProp] || options.token
     // verify signatures
-    if (!wechat.checkSignature(token, this.query)) {
+    if (checksig && !wechat.checkSignature(token, this.query)) {
       this.throw(401, 'Invalid signature')
     }
     if (this.method == 'GET') {
@@ -54,6 +55,8 @@ module.exports = function(options) {
     this.body = wechat.dump(wechat.ensure(this.body, this.req.body))
   }
 }
+
+module.exports.parse = parse
 
 /**
  * To close the request, stop runs any `next` actions
