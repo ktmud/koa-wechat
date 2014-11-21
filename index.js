@@ -51,11 +51,11 @@ module.exports = function(options) {
     // run other middlewares
     yield next
     // output
-    if (!this.body) {
-        this.body = ""; 
+    if (this.body) {
+      this.type = 'application/xml'
+      this.body = wechat.dump(wechat.ensure(this.body, this.req.body))
     } else {
-        this.type = 'application/xml'
-        this.body = wechat.dump(wechat.ensure(this.body, this.req.body))
+      this.body = ''
     };
   }
 }

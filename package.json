@@ -1,13 +1,13 @@
 {
   "name": "koa-wechat",
-  "version": "0.1.3",
+  "version": "0.1.4",
   "description": "wechat offical account API middleware for koajs",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "dependencies": {
-    "wechat-mp": "^0.2.3"
+    "wechat-mp": "^0.2.5"
   },
   "repository": {
     "type": "git",
