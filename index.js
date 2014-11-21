@@ -51,8 +51,12 @@ module.exports = function(options) {
     // run other middlewares
     yield next
     // output
-    this.type = 'application/xml'
-    this.body = wechat.dump(wechat.ensure(this.body, this.req.body))
+    if (!this.body) {
+        this.body = ""; 
+    } else {
+        this.type = 'application/xml'
+        this.body = wechat.dump(wechat.ensure(this.body, this.req.body))
+    };
   }
 }
 
